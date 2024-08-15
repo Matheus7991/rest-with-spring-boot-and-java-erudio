@@ -24,6 +24,39 @@ public class MathController {
 		}
 		return convertToDouble(numberOne) + convertToDouble(numerTwo);
 	}
+	
+	@GetMapping(value = "/min/{numerOne}/{numerTwo}")
+	public Double min(
+			@PathVariable(value = "numerOne") String numberOne,
+			@PathVariable(value = "numerTwo") String numerTwo) throws Exception {
+		
+		if(!isnNumeric(numberOne) || !isnNumeric(numerTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value");
+		}
+		return convertToDouble(numberOne) - convertToDouble(numerTwo);
+	}
+	
+	@GetMapping(value = "/mul/{numerOne}/{numerTwo}")
+	public Double mul(
+			@PathVariable(value = "numerOne") String numberOne,
+			@PathVariable(value = "numerTwo") String numerTwo) throws Exception {
+		
+		if(!isnNumeric(numberOne) || !isnNumeric(numerTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value");
+		}
+		return convertToDouble(numberOne) * convertToDouble(numerTwo);
+	}
+	
+	@GetMapping(value = "/div/{numerOne}/{numerTwo}")
+	public Double div(
+			@PathVariable(value = "numerOne") String numberOne,
+			@PathVariable(value = "numerTwo") String numerTwo) throws Exception {
+		
+		if(!isnNumeric(numberOne) || !isnNumeric(numerTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value");
+		}
+		return convertToDouble(numberOne) / convertToDouble(numerTwo);
+	}
 
 	private Double convertToDouble(String strNumber) {
 		if (strNumber == null) return 0D;
