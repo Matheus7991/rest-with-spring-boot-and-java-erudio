@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.matheus.data.vo.v1.PersonVO;
 import br.com.matheus.exceptions.ResourceNotFoundException;
+import br.com.matheus.mapper.DozerMapper;
+import br.com.matheus.model.Person;
 import br.com.matheus.repositories.PersonRepository;
 
 @Service
@@ -21,7 +23,7 @@ public class PersonServices {
 	public List<PersonVO> findAll() {
 		logger.info("Finding all persons!");
 		
-		return repository.findAll();		
+		return DozerMapper.parseListObjects(repository.findAll(), PersonVO.class);		
 	}
 
 	public PersonVO findById(Long id) {
@@ -29,13 +31,19 @@ public class PersonServices {
 		
 		PersonVO person = new PersonVO();
 		
-		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found this ID"));
+		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found this ID"));
+		
+		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
 	
 	public PersonVO create(PersonVO person) {
 		logger.info("Creating one person!");
 		
-		return repository.save(person);
+		var entity = DozerMapper.parseObject(person, Person.class);
+		
+		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		
+		return vo;
 	}
 	
 	public PersonVO update(PersonVO person) {
@@ -48,7 +56,9 @@ public class PersonServices {
 		entity.setAddress(person.getAddress());
 		entity.setGender(person.getGender());
 		
-		return repository.save(entity);
+		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		
+		return vo;
 	}
 	
 	public void delete(Long id) {
