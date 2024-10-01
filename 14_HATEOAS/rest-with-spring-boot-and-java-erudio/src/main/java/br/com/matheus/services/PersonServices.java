@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+//import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+//import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import br.com.matheus.controllers.PersonController;
@@ -17,6 +17,7 @@ import br.com.matheus.repositories.PersonRepository;
 
 @Service
 public class PersonServices {
+	
 	
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
 	
@@ -35,7 +36,7 @@ public class PersonServices {
 		var entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No records found this ID"));
 		
 		PersonVO vo = DozerMapper.parseObject(entity, PersonVO.class);
-		vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel);
+		//vo.add(linkTo(methodOn(PersonController.class).findById(id)).withSelfRel);
 		
 		return vo;
 	}
