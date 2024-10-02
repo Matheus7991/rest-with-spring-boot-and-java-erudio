@@ -5,11 +5,14 @@ import java.util.Objects;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({"id", "firsName", "lastName", "address","gender"})
 public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
+	@JsonProperty("id")
 	private Long key;	
 	private String firsName;
 	private String lastName;
