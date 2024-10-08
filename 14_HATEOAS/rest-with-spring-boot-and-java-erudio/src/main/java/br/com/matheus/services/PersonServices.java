@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import br.com.matheus.controllers.PersonController;
 import br.com.matheus.data.vo.v1.PersonVO;
+import br.com.matheus.exceptions.RequiredObjectIsNullException;
 import br.com.matheus.exceptions.ResourceNotFoundException;
+import br.com.matheus.exceptions.handler.CustomizedResponseEntityExceptionHandler;
 import br.com.matheus.mapper.DozerMapper;
 import br.com.matheus.model.Person;
 import br.com.matheus.repositories.PersonRepository;
@@ -56,6 +58,9 @@ public class PersonServices {
 	}
 	
 	public PersonVO create(PersonVO person){
+		
+		if(person == null) throw new RequiredObjectIsNullException();
+		
 		logger.info("Creating one person!");
 		
 		var entity = DozerMapper.parseObject(person, Person.class);
@@ -72,6 +77,9 @@ public class PersonServices {
 	}
 	
 	public PersonVO update(PersonVO person) {
+		
+		if(person == null) throw new RequiredObjectIsNullException();
+		
 		logger.info("Updating one person!");
 		
 		var entity = repository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("No records found this ID"));
