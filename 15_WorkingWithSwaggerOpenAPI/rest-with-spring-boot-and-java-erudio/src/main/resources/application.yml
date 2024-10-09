@@ -11,3 +11,8 @@ spring:
     properties:
       hibernate:
     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+springdoc:
+ pathsToMatch: /api/**/v1/**
+ swagger-ui:
+  use-root-path: true
