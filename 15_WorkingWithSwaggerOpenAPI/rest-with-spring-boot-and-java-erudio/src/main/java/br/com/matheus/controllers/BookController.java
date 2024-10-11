@@ -98,7 +98,7 @@ public class BookController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-	@Operation(summary = "Deletes a Person", description = "Deletes a Person by passing in a JSON, XML or YML representation of the person!", tags = {"Book"}, 
+	@Operation(summary = "Deletes a Book", description = "Deletes a Book by passing in a JSON, XML or YML representation of the book!", tags = {"Book"}, 
 	responses = { @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
 			      @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
 			      @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
