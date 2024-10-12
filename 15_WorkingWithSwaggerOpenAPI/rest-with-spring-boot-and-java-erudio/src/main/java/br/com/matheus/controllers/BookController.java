@@ -71,16 +71,16 @@ public class BookController {
 	}
 	
 	@PostMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})
-	@Operation(summary = "Adds a new Person", description = "Adds a new Person by passing in a JSON, XML or YML representation of the person!", tags = {"Book"}, 
+	@Operation(summary = "Adds a new Book", description = "Adds a new Book by passing in a JSON, XML or YML representation of the book!", tags = {"Book"}, 
 	responses = { @ApiResponse(description = "Success", responseCode = "200", content = @Content(schema = @Schema(implementation = PersonVO.class))),			
 			      @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
 			      @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
 			      @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
 			}
 		)
-	public PersonVO create(@RequestBody PersonVO person) throws Exception {
+	public Book create(@RequestBody Book book) throws Exception {
 		
-		return service.create(person);
+		return service.create(book);
 	}
 	
 	@PutMapping(produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML}, consumes = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.APPLICATION_YML})

@@ -62,23 +62,25 @@ public class BookServices {
 		return entity;
 	}
 	
-	public PersonVO create(PersonVO person){
+	public Book create(Book book){
 		
-		if(person == null) throw new RequiredObjectIsNullException();
+		if(book == null) throw new RequiredObjectIsNullException();
 		
-		logger.info("Creating one person!");
+		logger.info("Creating one Book!");
 		
-		var entity = DozerMapper.parseObject(person, Person.class);
+		repository.save(book);
 		
-		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		//var entity = DozerMapper.parseObject(book, Person.class);
 		
-		try {
+		//var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);
+		
+		/*try {
 			vo.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PersonController.class).findById(vo.getKey())).withSelfRel());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		
-		return vo;
+		return book;
 	}
 	
 	public PersonVO update(PersonVO person) {
