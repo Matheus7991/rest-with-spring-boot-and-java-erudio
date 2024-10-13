@@ -1,7 +1,6 @@
 package br.com.matheus.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -21,7 +20,7 @@ public class Book implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	@Column(name = "author", length = 180)
 	private String author;
@@ -30,10 +29,10 @@ public class Book implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date launchDate;
 	
-	@Column(name = "price", nullable = false, length = 65)
+	@Column(name = "price", nullable = false)
 	private Double price;
 	
-	@Column(name = "title")
+	@Column(name = "title", length = 250)
 	private String title;
 	
 	public Book() {
@@ -41,11 +40,11 @@ public class Book implements Serializable{
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getAuthor() {
@@ -56,11 +55,11 @@ public class Book implements Serializable{
 		this.author = author;
 	}
 
-	public Date getDatetime() {
+	public Date getLaunchDate() {
 		return launchDate;
 	}
 
-	public void setDatetime(Date launchDate) {
+	public void setLaunchDate(Date launchDate) {
 		this.launchDate = launchDate;
 	}
 
@@ -82,7 +81,7 @@ public class Book implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id, author, launchDate, price, title);
+		return Objects.hash(id, author, launchDate, price, title);
 	}
 
 	@Override
@@ -94,7 +93,7 @@ public class Book implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		return Id == other.Id && Objects.equals(author, other.author) && Objects.equals(launchDate, other.launchDate)
+		return id == other.id && Objects.equals(author, other.author) && Objects.equals(launchDate, other.launchDate)
 				&& Objects.equals(price, other.price) && Objects.equals(title, other.title);
 	}
 }
