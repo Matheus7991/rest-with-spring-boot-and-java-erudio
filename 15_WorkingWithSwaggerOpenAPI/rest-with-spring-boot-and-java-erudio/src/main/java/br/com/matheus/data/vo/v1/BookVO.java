@@ -1,20 +1,22 @@
 package br.com.matheus.data.vo.v1;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.hateoas.RepresentationModel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonPropertyOrder({"id", "author", "launchDate", "price","title"})
 public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@JsonProperty("id")
-	private Long Key;
+	private Long key;
 	private String author;
-	private LocalDateTime datetime;
+	private Date launchDate;
 	private Double price;
 	private String title;
 	
@@ -23,11 +25,11 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 	}
 
 	public Long getKey() {
-		return Key;
+		return key;
 	}
 
 	public void setKey(Long key) {
-		Key = key;
+		this.key = key;
 	}
 
 	public String getAuthor() {
@@ -38,12 +40,12 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 		this.author = author;
 	}
 
-	public LocalDateTime getDatetime() {
-		return datetime;
+	public Date getLaunchDate() {
+		return launchDate;
 	}
 
-	public void setDatetime(LocalDateTime datetime) {
-		this.datetime = datetime;
+	public void setLaunchDate(Date launchDate) {
+		this.launchDate = launchDate;
 	}
 
 	public Double getPrice() {
@@ -66,7 +68,7 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(Key, author, datetime, price, title);
+		result = prime * result + Objects.hash(key, author, launchDate, price, title);
 		return result;
 	}
 
@@ -79,8 +81,8 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		BookVO other = (BookVO) obj;
-		return Objects.equals(Key, other.Key) && Objects.equals(author, other.author)
-				&& Objects.equals(datetime, other.datetime) && Objects.equals(price, other.price)
+		return Objects.equals(key, other.key) && Objects.equals(author, other.author)
+				&& Objects.equals(launchDate, other.launchDate) && Objects.equals(price, other.price)
 				&& Objects.equals(title, other.title);
 	}
 	
