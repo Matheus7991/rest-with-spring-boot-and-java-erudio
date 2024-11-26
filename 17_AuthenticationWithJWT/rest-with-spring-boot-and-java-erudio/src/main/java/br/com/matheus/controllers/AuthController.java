@@ -28,25 +28,31 @@ public class AuthController {
 	@Operation(summary = "Authenticates a user and returns a token")
 	@PostMapping(value = "/signin")
 	public ResponseEntity signin(@RequestBody AccountCredentialsVO data) {
+		
 		if (checkIfParamsIsNotNull(data))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
 		var token = authServices.signin(data);
+		
 		if (token == null) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
 		} else {
 			return token;
 		}	
+		
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@Operation(summary = "Refresh token for authenticated user and returns a token")
 	@PutMapping(value = "/refresh/{username}")
-	public ResponseEntity refreshToken(@PathVariable("username") String username,
-			@RequestHeader("Authorization") String refreshToken) {
+	public ResponseEntity refreshToken(@PathVariable("username") String username, @RequestHeader("Authorization") String refreshToken) {
+		
 		if (checkIfParamsIsNotNull(username, refreshToken))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+		
 		var token = authServices.refreshToken(username, refreshToken);
+		
 		if (token == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+		
 		return token;
 	}
 
